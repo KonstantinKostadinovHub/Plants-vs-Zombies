@@ -36,13 +36,13 @@ void init(){
 
     ::SetConsoleScreenBufferSize(hConsoleOutput, screen_buf);
     ::SetConsoleWindowInfo(hConsoleOutput, TRUE, &rect);
-    ::SetConsoleTitle("FIGURI");
+    ::SetConsoleTitle("Plants vs Zombies");
     set_background();
 
 }
 
 void draw_str(char* str, int r, int c){
     for(int i = 0; str[i]!='\0'; i++){
-        draw_char(str[i], r, c + i, BLACK, backgroundColor);
+        draw_char(str[i], r + i, c, BLACK, backgroundColor);
     }
 }
