@@ -34,12 +34,16 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/Plant.h" />
+		<Unit filename="include/Shop.h" />
+		<Unit filename="include/ShopItem.h" />
 		<Unit filename="include/World.h" />
 		<Unit filename="include/Zombie.h" />
 		<Unit filename="include/color.h" />
 		<Unit filename="include/types.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Plant.cpp" />
+		<Unit filename="src/Shop.cpp" />
+		<Unit filename="src/ShopItem.cpp" />
 		<Unit filename="src/World.cpp" />
 		<Unit filename="src/Zombie.cpp" />
 		<Unit filename="src/color.cpp" />
