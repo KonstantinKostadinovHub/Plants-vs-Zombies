@@ -1,0 +1,12 @@
+------------
+----YNNN----
+---YNNNNN---
+--NNNNNNNN--
+--NNDNNDNN--
+--NNNDDNNN--
+--YNNNNNNN--
+--YNNNNNNN--
+--YNYNNNNN--
+---NYNNNN---
+----YYNN----
+------------
