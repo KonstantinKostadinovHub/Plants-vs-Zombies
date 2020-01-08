@@ -24,7 +24,7 @@ void clear_screen() {
 void set_background() {
     for (int i = 0; i < screen_buf.X; i++) {
         for (int j = 0; j < screen_buf.Y; j++) {
-             draw_char(' ', j, i, PINK, LIGHT_GREEN);
+             draw_char(' ', j, i, PINK, backgroundColor);
         }
     }
 }

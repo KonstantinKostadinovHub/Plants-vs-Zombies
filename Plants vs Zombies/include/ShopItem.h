@@ -12,12 +12,13 @@ using namespace std;
 class ShopItem
 {
     public:
-        ShopItem(int x, int y, int price, char key);
+        ShopItem(int x, int y, int price, char key, string fileName);
         int m_x, m_y;
         int m_price;
         char m_key;
+        string m_fileName;
         string picture[12];
-        void init(string fileName);
+        void init();
         virtual ~ShopItem();
 
     protected:

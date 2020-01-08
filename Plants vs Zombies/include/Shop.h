@@ -12,9 +12,11 @@ class Shop
         void initUI();
         void updateUI(int coins);
         virtual ~Shop();
-        void draw(string fileName, int x, int y);
+        void drawInGame(string fileName, int x, int y);
+        void drawInShop(string fileName, int x, int y, COLORS background);
         void plant();
         void buy(int& coins);
+        void canBuyItem(ShopItem item, int coins);
         int m_WIDTH;
         int m_plantPosX;
         int m_plantPosY;

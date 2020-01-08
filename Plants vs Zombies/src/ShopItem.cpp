@@ -2,12 +2,13 @@
 
 using namespace std;
 
-ShopItem::ShopItem(int x, int y, int price, char key)
+ShopItem::ShopItem(int x, int y, int price, char key, string fileName)
 {
     m_x = x;
     m_y = y;
     m_price = price;
     m_key = key;
+    m_fileName = fileName;
 }
 
 ShopItem::~ShopItem()
@@ -15,10 +16,10 @@ ShopItem::~ShopItem()
     //dtor
 }
 
-void ShopItem::init(string fileName)
+void ShopItem::init()
 {
     fstream fin;
-    fin.open(fileName.c_str());
+    fin.open(m_fileName.c_str());
     for (int i = 0; i < 12; i++) {
         getline(fin, picture[i]);
     }

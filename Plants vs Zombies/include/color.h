@@ -32,7 +32,7 @@ enum COLORS {
     WHITE =  FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY
 };
 
-const COLORS backgroundColor = LIGHT_GREEN;
+const COLORS backgroundColor = WHITE;
 
 void draw_char(char ch, int x, int y, COLORS foreground_color, COLORS background_color);
 void clear_screen();
