@@ -33,6 +33,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Untitled1.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="include/Plant.h" />
 		<Unit filename="include/Shop.h" />
 		<Unit filename="include/ShopItem.h" />
