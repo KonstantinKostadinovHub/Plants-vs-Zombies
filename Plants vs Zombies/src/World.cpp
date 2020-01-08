@@ -1,5 +1,5 @@
 #include "World.h"
-
+#include<windows.h>
 World::World(Shop* shop)
 {
     m_shop = shop;
@@ -45,5 +45,22 @@ void World::update()
 
 void World::draw()
 {
+
+}
+void World::music(){
+
+Beep(277.18,300);
+
+Beep(293.66,350);
+Beep(277.18,300);
+Beep(293.66,350);
+
+Beep(233.08,300);
+Beep(196,700);
+Beep(233.08,300);
+Beep(196,700);
+Beep(277.18,300);
+Beep(196,700);
+
 
 }

@@ -13,9 +13,14 @@ int main()
 {
     init();
     world.init();
+
+        world.music();
+
     while(!end_game){
+
         world.update();
         Sleep(200);
     }
+
     return 0;
 }

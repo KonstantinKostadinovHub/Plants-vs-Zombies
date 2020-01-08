@@ -23,7 +23,7 @@ class World
         void addZombie(ZOMBIES type, int x, int y);
         void addCoins();
         virtual ~World();
-
+        void music();
     protected:
 
     private:
