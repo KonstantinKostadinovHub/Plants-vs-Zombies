@@ -11,18 +11,17 @@ class Shop
         int m_WIDTH;
         int m_plantPosX;
         int m_plantPosY;
-        int new_m_plantPosX;
-        int new_m_plantPosY;
         PLANTS m_desiredPlant;
         Shop(int width);
         void initUI();
         void updateUI(int coins);
         virtual ~Shop();
-        void draw(string fileName, int x, int y);
+        void drawInGame(string fileName, int x, int y);
+        void drawInShop(string fileName, int x, int y, COLORS background);
         void plant();
         void buy(int& coins);
+        void canBuyItem(ShopItem item, int coins);
         void planting(int x,int y,int z,int p);
-
     protected:
 
     private:

@@ -14,8 +14,8 @@ int main()
     init();
     world.init();
 
-        world.music();
-
+    world.music();
+    //музиката забавя стартирането на играта Ицо - от Косьо
     while(!end_game){
 
         world.update();
