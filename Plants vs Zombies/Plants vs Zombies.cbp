@@ -33,13 +33,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Untitled1.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="include/Plant.h" />
 		<Unit filename="include/Shop.h" />
 		<Unit filename="include/ShopItem.h" />
 		<Unit filename="include/World.h" />
+		<Unit filename="include/Z_Default.h" />
 		<Unit filename="include/Zombie.h" />
 		<Unit filename="include/color.h" />
 		<Unit filename="include/types.h" />
@@ -48,6 +46,7 @@
 		<Unit filename="src/Shop.cpp" />
 		<Unit filename="src/ShopItem.cpp" />
 		<Unit filename="src/World.cpp" />
+		<Unit filename="src/Z_Default.cpp" />
 		<Unit filename="src/Zombie.cpp" />
 		<Unit filename="src/color.cpp" />
 		<Extensions>

@@ -5,19 +5,23 @@
 #include <windows.h>
 #include <winuser.h>
 #include <fstream>
+#include <cstdlib>
 #include "color.h"
+#include "types.h"
 
 using namespace std;
 
 class ShopItem
 {
     public:
-        ShopItem(int x, int y, int price, char key, string fileName);
+        ShopItem(PLANTS type, int x, int y, int price, char key, string fileName);
+        PLANTS m_type;
         int m_x, m_y;
         int m_price;
+        int m_SCALE;
         char m_key;
         string m_fileName;
-        string picture[12];
+        string picture[16];
         void init();
         virtual ~ShopItem();
 

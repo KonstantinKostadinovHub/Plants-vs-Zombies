@@ -1,15 +1,12 @@
 #include "Shop.h"
 
-ShopItem sunflowerShop(0, 2, 25, '1', "sunflower.txt");
-ShopItem beanShooterShop(0, 14, 50, '2', "beanshooter.txt");
-ShopItem walnutShop(0, 26, 50, '3', "walnut.txt");
-
-Shop::Shop(int width)
+Shop::Shop(int width, int scale)
 {
     m_desiredPlant = NOPLANT;
     m_plantPosX = 0;
     m_plantPosY = 0;
     m_WIDTH = width;
+    m_SCALE = scale;
 }
 
 Shop::~Shop()
@@ -17,21 +14,14 @@ Shop::~Shop()
     //dtor
 }
 
-void Shop::drawInGame(string fileName, int x, int y)
+void Shop::drawInGame(ShopItem* item, int x, int y)
 {
-    x *= 12;
-    y *= 12;
-    string picture[12];
-    fstream fin;
-    fin.open(fileName.c_str());
-    for (int i = 0; i < 12; i++) {
-        getline(fin, picture[i]);
-    }
-    fin.close();
+    x *= m_SCALE;
+    y *= m_SCALE;
     COLORS color = backgroundColor;
-    for (int i = 0; i < 12; i++) {
-        for (int j = 0; j < 12; j++) {
-            switch(picture[i][j]) {
+    for (int i = 0; i < m_SCALE; i++) {
+        for (int j = 0; j < m_SCALE; j++) {
+            switch(item->picture[i][j]) {
                 case 'R' : color = RED; break;
                 case 'G' : color = GREEN; break;
                 case 'W' : color = WHITE; break;
@@ -49,19 +39,12 @@ void Shop::drawInGame(string fileName, int x, int y)
     }
 }
 
-void Shop::drawInShop(string fileName, int x, int y, COLORS background)
+void Shop::drawInShop(ShopItem* item, COLORS background)
 {
-    string picture[12];
-    fstream fin;
-    fin.open(fileName.c_str());
-    for (int i = 0; i < 12; i++) {
-        getline(fin, picture[i]);
-    }
-    fin.close();
     COLORS color = backgroundColor;
-    for (int i = 0; i < 12; i++) {
-        for (int j = 0; j < 12; j++) {
-            switch(picture[i][j]) {
+    for (int i = 0; i < m_SCALE; i++) {
+        for (int j = 0; j < m_SCALE; j++) {
+            switch(item->picture[i][j]) {
                 case 'R' : color = RED; break;
                 case 'G' : color = GREEN; break;
                 case 'W' : color = WHITE; break;
@@ -73,7 +56,7 @@ void Shop::drawInShop(string fileName, int x, int y, COLORS background)
                 default: color = background;
             }
             if(color != backgroundColor){
-                draw_char('-', x + j, y + i, color, color);
+                draw_char('-', item->m_x + j, item->m_y + i, color, color);
             }
         }
     }
@@ -82,48 +65,46 @@ void Shop::drawInShop(string fileName, int x, int y, COLORS background)
 
 void Shop::initUI()
 {
+    m_item[0] = new ShopItem(SUNFLOWER, 0, 2, 25, '1', "sunflower.txt");
+    m_item[1] = new ShopItem(BEANSHOOTER, 0, 18, 50, '2', "beanshooter.txt");
+    m_item[2] = new ShopItem(WALNUT, 0, 34, 50, '3', "walnut.txt");
     draw_str("coins:", 0, 0);
-    sunflowerShop.init();
-    beanShooterShop.init();
-    walnutShop.init();
+    for(int i = 0; i < 3; i++){
+        m_item[i]->init();
+    }
 }
 
 void Shop::updateUI(int coins)
 {
     char buff[32];
-    itoa(coins, buff, 10);
+    sprintf(buff, "%d", coins);
     draw_str(buff, 0, 1);
-
-    canBuyItem(sunflowerShop, coins);
-    canBuyItem(beanShooterShop, coins);
-    canBuyItem(walnutShop, coins);
+    for(int i = 0; i < 3; i++){
+        canBuyItem((*m_item[i]), coins);
+    }
 }
 
 void Shop::canBuyItem(ShopItem item, int coins)
 {
     if(item.m_price > coins){
-        drawInShop(item.m_fileName, item.m_x, item.m_y, GREY);
+        drawInShop(&item, GREY);
     }else{
-        drawInShop(item.m_fileName, item.m_x, item.m_y, LIGHT_GREY);
+        drawInShop(&item, LIGHT_GREY);
     }
 }
 
 void Shop::buy(int& coins)
 {
     if(m_desiredPlant == NOPLANT){
-        if(GetAsyncKeyState(sunflowerShop.m_key) && sunflowerShop.m_price <= coins)
-        {
-            coins -= sunflowerShop.m_price;
-            m_desiredPlant = SUNFLOWER;
-        }else if(GetAsyncKeyState(beanShooterShop.m_key) && beanShooterShop.m_price <= coins){
-            coins -= beanShooterShop.m_price;
-            m_desiredPlant = BEANSHOOTER;
-        }else if(GetAsyncKeyState(walnutShop.m_key) && walnutShop.m_price <= coins){
-            coins -= walnutShop.m_price;
-            m_desiredPlant = WALNUT;
+        for(int i = 0; i < 3; i++){
+            if(GetAsyncKeyState(m_item[i]->m_key) && m_item[i]->m_price <= coins){
+                coins -= m_item[i]->m_price;
+                m_desiredPlant = m_item[i]->m_type;
+            }
         }
     }
 }
+
 void Shop::plant(){
     if(m_desiredPlant != NOPLANT){
         int oldX = m_plantPosX, oldY = m_plantPosY;
@@ -137,19 +118,17 @@ void Shop::plant(){
             m_plantPosX ++;
         }
         if(oldX != m_plantPosX || oldY != m_plantPosY){
-            for (int i = 0; i < 12; i++) {
-                for (int j = 0; j < 12; j++) {
-                    draw_char('-', m_WIDTH + oldX * 12 + j, oldY * 12 + i, backgroundColor, backgroundColor);
+            for (int i = 0; i < m_SCALE; i++) {
+                for (int j = 0; j < m_SCALE; j++) {
+                    draw_char('-', m_WIDTH + oldX * m_SCALE + j, oldY * m_SCALE + i, backgroundColor, backgroundColor);
                 }
             }
         }
     }
-    if(m_desiredPlant == SUNFLOWER){
-        drawInGame(sunflowerShop.m_fileName, m_plantPosX, m_plantPosY);
-    }else if(m_desiredPlant == BEANSHOOTER){
-        drawInGame(beanShooterShop.m_fileName, m_plantPosX, m_plantPosY);
-    }else if(m_desiredPlant == WALNUT){
-        drawInGame(walnutShop.m_fileName, m_plantPosX, m_plantPosY);
+    for(int i = 0; i < 3; i++){
+        if(m_desiredPlant == m_item[i]->m_type){
+            drawInGame(m_item[i], m_plantPosX, m_plantPosY);
+        }
     }
 }
 
