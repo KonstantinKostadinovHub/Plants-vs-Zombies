@@ -2,14 +2,11 @@
 
 using namespace std;
 
-ShopItem::ShopItem(PLANTS type, int x, int y, int price, char key, string fileName)
+ShopItem::ShopItem(PLANTS type, int x, int y, int price, char key, string fileName, string configName)
 {
     m_type = type;
-    m_x = x;
-    m_y = y;
-    m_price = price;
-    m_key = key;
     m_fileName = fileName;
+    m_configName = configName;
     m_SCALE = 16;
 }
 
@@ -20,6 +17,10 @@ ShopItem::~ShopItem()
 
 void ShopItem::init()
 {
+    fstream config;
+    config.open(m_configName.c_str());
+    config >> m_x >> m_y >> m_price >> m_key;
+    config.close();
     fstream fin;
     fin.open(m_fileName.c_str());
     for (int i = 0; i < m_SCALE; i++) {
