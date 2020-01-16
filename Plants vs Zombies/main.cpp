@@ -3,6 +3,7 @@
 #include <ctime>
 #include "World.h"
 #include "ShopItem.h"
+#include "Beanshooter.h"
 
 using namespace std;
 
@@ -24,6 +25,10 @@ int main()
     Z_Default* S_Zombie3 = new Z_Default;
     S_Zombie3->init("zombie.txt", world.m_pole_cols + 10, 2 * world.m_SCALE);
     S_Zombie3->print();
+
+    Plant* beanshooter1 = new Beanshooter();
+    beanshooter1->init(0, 0, "BeanshooterConfig.txt");
+    beanshooter1->print();
 
     world.m_zombies.push_back(S_Zombie1);
     world.m_zombies.push_back(S_Zombie2);

@@ -7,7 +7,6 @@ class Z_Default:public Zombie{
     public:
         Z_Default();
         virtual ~Z_Default();
-
     protected:
 
     private:

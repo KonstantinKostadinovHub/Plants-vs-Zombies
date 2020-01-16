@@ -44,6 +44,10 @@ void World::update()
     for(int i=0; i < m_zombies.size(); i++){
         m_zombies[i]->moveZombie();
     }
+    //plants
+    for(int i=0; i < m_plants.size(); i++){
+        m_plants[i]->action();
+    }
     //shop
     addCoins();
     m_shop->updateUI(m_coins);
@@ -54,8 +58,11 @@ void World::update()
 void World::draw()
 {
     //zombies
-    for(int i=0; i < m_zombies.size(); i++){
+    for(int i = 0; i < m_zombies.size(); i++){
         m_zombies[i]->print();
+    }
+    for(int i = 0; i < m_plants.size(); i++){
+        m_plants[i]->print();
     }
 }
 void World::music(){

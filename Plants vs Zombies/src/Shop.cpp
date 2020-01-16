@@ -65,9 +65,9 @@ void Shop::drawInShop(ShopItem* item, COLORS background)
 
 void Shop::initUI()
 {
-    m_item[0] = new ShopItem(SUNFLOWER, 0, 2, 25, '1', "sunflower.txt", "ShopSunflower.txt");
-    m_item[1] = new ShopItem(BEANSHOOTER, 0, 18, 50, '2', "beanshooter.txt", "ShopBeanshooter.txt");
-    m_item[2] = new ShopItem(WALNUT, 0, 34, 50, '3', "walnut.txt", "ShopWalnut.txt");
+    m_item[0] = new ShopItem(SUNFLOWER, "ShopSunflower.txt");
+    m_item[1] = new ShopItem(BEANSHOOTER, "ShopBeanshooter.txt");
+    m_item[2] = new ShopItem(WALNUT, "ShopWalnut.txt");
     draw_str("coins:", 0, 0);
     for(int i = 0; i < 3; i++){
         m_item[i]->init();

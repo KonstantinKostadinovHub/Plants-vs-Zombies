@@ -572,3 +572,86 @@
 1579079600 source:c:\users\smgbe77\downloads\plants-vs-zombies-master\plants-vs-zombies-master\plants vs zombies\src\shop.cpp
 	"Shop.h"
 
+1578891154 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\color.cpp
+	"color.h"
+
+1578891152 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\color.h
+	<iostream>
+	<windows.h>
+	<winuser.h>
+
+1579203804 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\world.cpp
+	"World.h"
+	<windows.h>
+
+1579203569 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\world.h
+	<vector>
+	"color.h"
+	"types.h"
+	"Shop.h"
+	"Z_Default.h"
+	"Plant.h"
+
+1578891152 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\types.h
+
+1579028374 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\shop.h
+	<stdlib.h>
+	"color.h"
+	"ShopItem.h"
+	"types.h"
+
+1579198367 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\shopitem.h
+	<iostream>
+	<windows.h>
+	<winuser.h>
+	<fstream>
+	<cstdlib>
+	"color.h"
+	"types.h"
+
+1579200471 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\z_default.h
+	"Zombie.h"
+
+1578927680 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\zombie.h
+	"color.h"
+	<iostream>
+	<winuser.h>
+	<fstream>
+	<windows.h>
+
+1578926968 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\z_default.cpp
+	"Z_Default.h"
+
+1578927760 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\zombie.cpp
+	"Zombie.h"
+
+1579198356 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\shop.cpp
+	"Shop.h"
+
+1579203337 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\main.cpp
+	<iostream>
+	<ctime>
+	"World.h"
+	"ShopItem.h"
+	"Beanshooter.h"
+
+1579203874 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\beanshooter.h
+	"Plant.h"
+
+1579203595 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\plant.h
+	"color.h"
+	"types.h"
+	<iostream>
+	<winuser.h>
+	<fstream>
+	<windows.h>
+
+1579201665 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\shopitem.cpp
+	"ShopItem.h"
+
+1579203289 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\plant.cpp
+	"Plant.h"
+
+1579203289 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\beanshooter.cpp
+	"Beanshooter.h"
+

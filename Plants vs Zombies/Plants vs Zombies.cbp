@@ -33,6 +33,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/Beanshooter.h" />
 		<Unit filename="include/Plant.h" />
 		<Unit filename="include/Shop.h" />
 		<Unit filename="include/ShopItem.h" />
@@ -42,6 +43,7 @@
 		<Unit filename="include/color.h" />
 		<Unit filename="include/types.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Beanshooter.cpp" />
 		<Unit filename="src/Plant.cpp" />
 		<Unit filename="src/Shop.cpp" />
 		<Unit filename="src/ShopItem.cpp" />

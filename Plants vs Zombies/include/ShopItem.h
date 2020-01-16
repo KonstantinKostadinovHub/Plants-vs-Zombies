@@ -14,7 +14,7 @@ using namespace std;
 class ShopItem
 {
     public:
-        ShopItem(PLANTS type, int x, int y, int price, char key, string fileName, string configName);
+        ShopItem(PLANTS type, string configName);
         string m_configName;
         PLANTS m_type;
         int m_x, m_y;

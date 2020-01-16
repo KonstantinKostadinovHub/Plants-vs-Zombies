@@ -6,6 +6,7 @@
 #include "types.h"
 #include "Shop.h"
 #include "Z_Default.h"
+#include "Plant.h"
 
 class World
 {
@@ -13,6 +14,7 @@ class World
         World();
         vector <Zombie*> m_zombies;
         vector <Zombie*> m_waitingZombies;
+        vector <Plant*> m_plants;
         Shop* m_shop;
         int m_pole_rows;
         int m_pole_cols;
