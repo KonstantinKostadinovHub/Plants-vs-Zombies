@@ -6,7 +6,7 @@
 #include "types.h"
 #include "Shop.h"
 #include "Z_Default.h"
-#include "Plant.h"
+#include "Bullet.h"
 
 class World
 {
@@ -15,6 +15,7 @@ class World
         vector <Zombie*> m_zombies;
         vector <Zombie*> m_waitingZombies;
         vector <Plant*> m_plants;
+        vector <Bullet*> m_bullets;
         Shop* m_shop;
         int m_pole_rows;
         int m_pole_cols;
@@ -29,6 +30,7 @@ class World
         void addPlant(PLANTS type, int x, int y);
         void addZombie(ZOMBIES type, int x, int y);
         void addCoins();
+        bool checkForCollision(Zombie zombie, Bullet bullet);
         virtual ~World();
         void music();
     protected:

@@ -23,6 +23,13 @@ void World::initWorld()
     m_shop->initUI();
 }
 
+bool World::checkForCollision(Zombie zombie, Bullet bullet){
+    if(bullet.m_x + bullet.m_SCALE >= zombie.m_x && bullet.m_y == zombie.m_y){
+        return true;
+    }
+    return false;
+}
+
 void World::addPlant(PLANTS type, int x, int y)
 {
 
@@ -48,6 +55,21 @@ void World::update()
     for(int i=0; i < m_plants.size(); i++){
         m_plants[i]->action();
     }
+
+    //bullet
+    for(int i=0; i < m_bullets.size(); i++){
+        m_bullets[i]->action();
+    }
+
+    //collision check
+    for(int i = 0; i < m_zombies.size(); i++){
+        for(int j = 0; j < m_bullets.size(); j++){
+            if(checkForCollision(*m_zombies[i], *m_bullets[j])){
+                m_zombies[i]->m_health -= m_bullets[j]->m_damage;
+            }
+        }
+    }
+
     //shop
     addCoins();
     m_shop->updateUI(m_coins);
@@ -63,6 +85,9 @@ void World::draw()
     }
     for(int i = 0; i < m_plants.size(); i++){
         m_plants[i]->print();
+    }
+    for(int i=0; i < m_bullets.size(); i++){
+        m_bullets[i]->print();
     }
 }
 void World::music(){

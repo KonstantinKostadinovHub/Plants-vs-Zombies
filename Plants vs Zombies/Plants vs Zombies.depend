@@ -580,17 +580,17 @@
 	<windows.h>
 	<winuser.h>
 
-1579203804 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\world.cpp
+1579206592 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\world.cpp
 	"World.h"
 	<windows.h>
 
-1579203569 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\world.h
+1579205076 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\world.h
 	<vector>
 	"color.h"
 	"types.h"
 	"Shop.h"
 	"Z_Default.h"
-	"Plant.h"
+	"Bullet.h"
 
 1578891152 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\types.h
 
@@ -628,7 +628,7 @@
 1579198356 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\shop.cpp
 	"Shop.h"
 
-1579203337 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\main.cpp
+1579205691 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\main.cpp
 	<iostream>
 	<ctime>
 	"World.h"
@@ -652,6 +652,12 @@
 1579203289 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\plant.cpp
 	"Plant.h"
 
-1579203289 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\beanshooter.cpp
+1579203944 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\beanshooter.cpp
 	"Beanshooter.h"
+
+1579206058 c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\include\bullet.h
+	"Plant.h"
+
+1579206294 source:c:\users\konstantin\documents\c++ programing\shkola_2019-2020\plants-vs-zombies\plants vs zombies\src\bullet.cpp
+	"Bullet.h"
 

@@ -30,6 +30,12 @@ int main()
     beanshooter1->init(0, 0, "BeanshooterConfig.txt");
     beanshooter1->print();
 
+    Bullet* bullet = new Bullet();
+    bullet->init(0, 0, "BulletConfig.txt");
+    bullet->print();
+
+    world.m_bullets.push_back(bullet);
+
     world.m_zombies.push_back(S_Zombie1);
     world.m_zombies.push_back(S_Zombie2);
     world.m_zombies.push_back(S_Zombie3);
