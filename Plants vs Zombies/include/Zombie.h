@@ -7,7 +7,7 @@
 #include <windows.h>
 
 
-const int SCALE = 12;
+const int SCALE = 16;
 const int Z_DEF_HP = 8;
 
 class Zombie{

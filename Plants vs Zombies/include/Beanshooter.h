@@ -2,6 +2,7 @@
 #define BEANSHOOTER_H
 
 #include "Plant.h"
+#include "Bullet.h"
 
 class Beanshooter : public Plant
 {

@@ -26,7 +26,6 @@ class Shop
         void plant();
         void buy(int& coins);
         void canBuyItem(ShopItem item, int coins);
-        void planting(int x,int y,int z,int p);
     protected:
 
     private:

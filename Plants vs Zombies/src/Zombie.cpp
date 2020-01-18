@@ -14,7 +14,7 @@ void Zombie::init(string file_name, int x, int y){
     m_y = y;
     fstream fin;
     fin.open(file_name.c_str());
-    for(int i=0; i<SCALE; i++){
+    for(int i = 0; i < SCALE; i++){
         getline(fin, picture[i]);
     }
     fin.close();

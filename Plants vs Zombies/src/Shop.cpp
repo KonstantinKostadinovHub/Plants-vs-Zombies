@@ -131,8 +131,3 @@ void Shop::plant(){
         }
     }
 }
-
-void Shop::planting(int x,int y,int z,int p)
-{
-
-}

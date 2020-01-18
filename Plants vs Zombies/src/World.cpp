@@ -9,6 +9,7 @@ World::World()
         m_SPACE_COUNT = 8;
         m_SCALE = 16;
         m_coins = 0;
+        m_zombiesWaveConfig = "zombies_1.txt";
 }
 
 World::~World()
@@ -21,6 +22,19 @@ void World::initWorld()
     init();
     m_shop = new Shop(16, m_SCALE);
     m_shop->initUI();
+    fstream configZombies;
+    configZombies.open(m_zombiesWaveConfig.c_str());
+    int buff;
+    configZombies >> buff;
+    int zombiesPositions[buff];
+    for(int i; i < buff; i++){
+        configZombies >> zombiesPositions[i];
+    }
+    configZombies.close();
+    //zombies
+    for(int i = 0; i < m_zombies.size(); i++){
+        m_zombies[i]->init("zombie.txt",  m_pole_cols + 10, zombiesPositions[i] * m_SCALE);
+    }
 }
 
 bool World::checkForCollision(Zombie zombie, Bullet bullet){
@@ -30,9 +44,20 @@ bool World::checkForCollision(Zombie zombie, Bullet bullet){
     return false;
 }
 
-void World::addPlant(PLANTS type, int x, int y)
+void World::addPlant()
 {
-
+    PLANTS type = m_shop->m_desiredPlant;
+    if(type != NOPLANT){
+        if(type == BEANSHOOTER){
+            int x = m_shop->m_plantPosX, y = m_shop->m_plantPosY;
+            Plant* beanshooter1 = new Beanshooter();
+            beanshooter1->init(x, y, "BeanshooterConfig.txt");
+            m_plants.push_back(beanshooter1);
+        }
+        m_shop->m_desiredPlant = NOPLANT;
+        m_shop->m_plantPosX = 0;
+        m_shop->m_plantPosY = 0;
+    }
 }
 
 void World::addZombie(ZOMBIES type, int x, int y)
@@ -83,9 +108,12 @@ void World::draw()
     for(int i = 0; i < m_zombies.size(); i++){
         m_zombies[i]->print();
     }
+    //plants
     for(int i = 0; i < m_plants.size(); i++){
+        draw_char('-', 30 + i, 0, GREEN, GREEN);
         m_plants[i]->print();
     }
+    //bullets
     for(int i=0; i < m_bullets.size(); i++){
         m_bullets[i]->print();
     }
