@@ -22,8 +22,8 @@ int main()
     world.m_zombies.push_back(S_Zombie1);
     world.m_zombies.push_back(S_Zombie2);
     world.m_zombies.push_back(S_Zombie3);
+
     //world.music();
-    //музиката забавя стартирането на играта Ицо - от Косьо
 
     world.initWorld();
 
@@ -33,7 +33,8 @@ int main()
         }
         world.update();
         world.draw();
-        Sleep(100);
+        world.cleaner();
+        Sleep(50);
     }
 
     return 0;

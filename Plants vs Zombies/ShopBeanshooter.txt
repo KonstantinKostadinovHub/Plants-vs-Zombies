@@ -1,5 +1,5 @@
 0
 18
-50
+5
 2
 beanshooter.txt

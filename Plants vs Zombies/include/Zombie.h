@@ -16,13 +16,14 @@ class Zombie{
         int m_x, m_y;
         int m_health;
         bool m_status=false;
+        int m_UI_WIDTH = 16;
 
         Zombie();
         virtual ~Zombie();
-        virtual void init(string file_name, int x, int y);
+        virtual void init(string file_name, int y);
         virtual void print();
         virtual void moveZombie();
-
+        virtual void takeDamage(int damage);
     protected:
 
     private:

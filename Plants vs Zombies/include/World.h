@@ -8,6 +8,14 @@
 #include "Beanshooter.h"
 #include "Z_Default.h"
 #include "Bullet.h"
+#include "walnut.h"
+#include "Sunflower.h"
+#include <cstdlib>
+#include <ctime>
+
+
+static const int SPAWN_BULLET = 2;
+static const int ADD_MONEY = 1;
 
 class World
 {
@@ -27,6 +35,7 @@ class World
         int m_LANE_COUNT;
         int m_SPACE_COUNT;
         int m_coins;
+        void cleaner();
         void initWorld();
         void update();
         void draw();

@@ -7,7 +7,7 @@
 class Beanshooter : public Plant
 {
     public:
-        virtual void action();
+        virtual int action();
         Beanshooter();
         virtual ~Beanshooter();
     protected:

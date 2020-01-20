@@ -2,7 +2,7 @@
 
 
 Z_Default::Z_Default(){
-    m_health=Z_DEF_HP;
+    m_health = Z_DEF_HP;
 }
 
 Z_Default::~Z_Default(){

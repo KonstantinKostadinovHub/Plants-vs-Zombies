@@ -21,11 +21,12 @@ class Plant
         int m_UI_WIDTH;
         string m_picture[16];
 
+        friend istream& operator>> (istream& in, Plant& plant);
         Plant();
         virtual ~Plant();
         virtual void init(int x, int y, string configName);
         virtual void print();
-        virtual void action();
+        virtual int action();
 
     protected:
 

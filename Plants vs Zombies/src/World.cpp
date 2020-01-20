@@ -1,4 +1,5 @@
 #include "World.h"
+#include <vector>
 #include<windows.h>
 World::World()
 {
@@ -20,6 +21,7 @@ World::~World()
 void World::initWorld()
 {
     init();
+    srand(time(NULL));
     m_shop = new Shop(16, m_SCALE);
     m_shop->initUI();
     fstream configZombies;
@@ -33,12 +35,13 @@ void World::initWorld()
     configZombies.close();
     //zombies
     for(int i = 0; i < m_zombies.size(); i++){
-        m_zombies[i]->init("zombie.txt",  m_pole_cols + 10, zombiesPositions[i] * m_SCALE);
+        m_zombies[i]->init("zombie.txt", zombiesPositions[i] * m_SCALE);
     }
 }
 
 bool World::checkForCollision(Zombie zombie, Bullet bullet){
-    if(bullet.m_x + bullet.m_SCALE >= zombie.m_x && bullet.m_y == zombie.m_y){
+    //TO-DO the number in the for-cycle must not be hard-coded
+    if(bullet.m_x + 10>= zombie.m_x && bullet.m_y == zombie.m_y){
         return true;
     }
     return false;
@@ -48,11 +51,19 @@ void World::addPlant()
 {
     PLANTS type = m_shop->m_desiredPlant;
     if(type != NOPLANT){
+        int x = m_shop->m_plantPosX, y = m_shop->m_plantPosY;
         if(type == BEANSHOOTER){
-            int x = m_shop->m_plantPosX, y = m_shop->m_plantPosY;
             Plant* beanshooter1 = new Beanshooter();
             beanshooter1->init(x, y, "BeanshooterConfig.txt");
             m_plants.push_back(beanshooter1);
+        }else if(type == WALNUT){
+            Plant* walnut1 = new walnut();
+            walnut1->init(x, y, "WalnutConfig.txt");
+            m_plants.push_back(walnut1);
+        }else if(type ==SUNFLOWER){
+            Plant* sunflower1 = new Sunflower();
+            sunflower1->init(x, y, "SunflowerConfig.txt");
+            m_plants.push_back(sunflower1);
         }
         m_shop->m_desiredPlant = NOPLANT;
         m_shop->m_plantPosX = 0;
@@ -70,6 +81,43 @@ void World::addCoins()
     m_coins++;
 }
 
+void World::cleaner()
+{
+    for(int i=0; i < m_zombies.size(); i++){
+        if(m_zombies[i]->m_health <= 0){
+            for (int h = 0; h < m_SCALE; h++) {
+                for (int k = 0; k < m_SCALE; k++) {
+                    draw_char('-', m_zombies[i]->m_x + m_UI_WIDTH + k, m_zombies[i]->m_y + h,   backgroundColor, backgroundColor);
+                }
+            }
+            m_zombies.erase(m_zombies.begin() + i);
+            i--;
+        }
+    }
+    for(int i=0; i < m_plants.size(); i++){
+        if(m_plants[i]->m_health <= 0){
+            for (int h = 0; h < m_SCALE; h++) {
+                for (int k = 0; k < m_SCALE; k++) {
+                    draw_char('-', m_plants[i]->m_x + m_UI_WIDTH + k, m_plants[i]->m_y + h,   backgroundColor, backgroundColor);
+                }
+            }
+            m_plants.erase(m_plants.begin() + i);
+            i--;
+        }
+    }
+    for(int i=0; i < m_bullets.size(); i++){
+        if(m_bullets[i]->m_health <= 0){
+            for (int h = 0; h < m_SCALE; h++) {
+                for (int k = 0; k < m_SCALE; k++) {
+                    draw_char('-', m_bullets[i]->m_x + m_UI_WIDTH + k, m_bullets[i]->m_y + h,   backgroundColor, backgroundColor);
+                }
+            }
+            m_bullets.erase(m_bullets.begin() + i);
+            i--;
+        }
+    }
+}
+
 void World::update()
 {
     //zombies
@@ -78,7 +126,14 @@ void World::update()
     }
     //plants
     for(int i=0; i < m_plants.size(); i++){
-        m_plants[i]->action();
+        int value = m_plants[i]->action();
+        if(value == SPAWN_BULLET && rand() % 10 == 0){
+            Bullet* bullet = new Bullet();
+            bullet->init(m_plants[i]->m_x, m_plants[i]->m_y, "BulletConfig.txt");
+            m_bullets.push_back(bullet);
+        }else if(value == ADD_MONEY){
+                    m_coins+=25;
+        }
     }
 
     //bullet
@@ -90,7 +145,13 @@ void World::update()
     for(int i = 0; i < m_zombies.size(); i++){
         for(int j = 0; j < m_bullets.size(); j++){
             if(checkForCollision(*m_zombies[i], *m_bullets[j])){
-                m_zombies[i]->m_health -= m_bullets[j]->m_damage;
+                m_zombies[i]->takeDamage(m_bullets[j]->m_damage);
+                for (int h = 0; h < m_SCALE; h++) {
+                    for (int k = 0; k < m_SCALE; k++) {
+                        draw_char('-', m_bullets[j]->m_x + m_UI_WIDTH + k, m_bullets[j]->m_y + h,   backgroundColor, backgroundColor);
+                    }
+                }
+                m_bullets[j]->m_health = 0;
             }
         }
     }
@@ -110,7 +171,6 @@ void World::draw()
     }
     //plants
     for(int i = 0; i < m_plants.size(); i++){
-        draw_char('-', 30 + i, 0, GREEN, GREEN);
         m_plants[i]->print();
     }
     //bullets
@@ -118,6 +178,7 @@ void World::draw()
         m_bullets[i]->print();
     }
 }
+
 void World::music(){
 
 Beep(277.18,300);

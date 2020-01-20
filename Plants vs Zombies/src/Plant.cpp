@@ -10,6 +10,10 @@ Plant::~Plant()
     //dtor
 }
 
+istream& operator>> (istream& in, Plant& plant){
+    in >> plant.m_health >> plant.m_damage  >> plant.m_gfxName;
+}
+
 void Plant::init(int x, int y, string configName)
 {
 
@@ -21,7 +25,7 @@ void Plant::init(int x, int y, string configName)
 
     fstream config;
     config.open(m_configName.c_str());
-    config >> m_health >> m_damage  >> m_gfxName;
+    config >> *this;
     config.close();
 
     fstream fin;
@@ -55,7 +59,7 @@ void Plant::print()
     }
 }
 
-void Plant::action()
+int Plant::action()
 {
 
 }

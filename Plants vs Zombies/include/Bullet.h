@@ -6,10 +6,10 @@
 class Bullet : public Plant
 {
     public:
-        virtual void init(int x, int y, string configName);
-        virtual void action();
-        virtual void print();
         Bullet();
+        virtual void init(int x, int y, string configName);
+        virtual int action();
+        virtual void print();
         virtual ~Bullet();
 
     protected:

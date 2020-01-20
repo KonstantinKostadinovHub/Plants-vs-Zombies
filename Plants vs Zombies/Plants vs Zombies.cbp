@@ -43,6 +43,7 @@
 		<Unit filename="include/Zombie.h" />
 		<Unit filename="include/color.h" />
 		<Unit filename="include/types.h" />
+		<Unit filename="include/walnut.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Beanshooter.cpp" />
 		<Unit filename="src/Bullet.cpp" />
@@ -53,6 +54,7 @@
 		<Unit filename="src/Z_Default.cpp" />
 		<Unit filename="src/Zombie.cpp" />
 		<Unit filename="src/color.cpp" />
+		<Unit filename="src/walnut.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
