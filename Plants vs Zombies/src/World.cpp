@@ -10,7 +10,10 @@ World::World()
         m_SPACE_COUNT = 8;
         m_SCALE = 16;
         m_coins = 0;
+        m_plantPosX = 0;
+        m_plantPosY = 0;
         m_zombiesWaveConfig = "zombies_1.txt";
+        m_desiredPlant = NOPLANT;
 }
 
 World::~World()
@@ -24,6 +27,9 @@ void World::initWorld()
     srand(time(NULL));
     m_shop = new Shop(m_UI_WIDTH, m_SCALE);
     m_shop->initUI();
+    for(int i = 0; i < 3; i++){
+        m_item[i] = m_shop->m_item[i];
+    }
     fstream configZombies;
     configZombies.open(m_zombiesWaveConfig.c_str());
     int buff;
@@ -39,6 +45,70 @@ void World::initWorld()
     }
 }
 
+void World::drawInGame(ShopItem* item, int x, int y)
+{
+    x *= m_SCALE;
+    y *= m_SCALE;
+    COLORS color = backgroundColor;
+    for (int i = 0; i < m_SCALE; i++) {
+        for (int j = 0; j < m_SCALE; j++) {
+            switch(item->picture[i][j]) {
+                case 'R' : color = RED; break;
+                case 'G' : color = GREEN; break;
+                case 'W' : color = WHITE; break;
+                case 'D' : color = BLACK; break;
+                case 'Y' : color = YELLOW; break;
+                case 'B' : color = BLUE; break;
+                case 'L' : color = LIGHT_GREEN; break;
+                case 'N' : color = BROWN; break;
+                default: color = backgroundColor;
+            }
+            if(color != backgroundColor){
+                draw_char('-',m_UI_WIDTH + x + j, y + i, color, color);
+            }
+        }
+    }
+}
+
+void World::plant(){
+    if(m_desiredPlant != NOPLANT){
+        int oldX = m_plantPosX, oldY = m_plantPosY;
+        if(GetAsyncKeyState('W') && m_plantPosY > 0){
+            m_plantPosY --;
+        }else if(GetAsyncKeyState('A') && m_plantPosX > 0){
+            m_plantPosX --;
+        }else if(GetAsyncKeyState('S')){
+            m_plantPosY ++;
+        }else if(GetAsyncKeyState('D')){
+            m_plantPosX ++;
+        }
+        if(oldX != m_plantPosX || oldY != m_plantPosY){
+            for (int i = 0; i < m_SCALE; i++) {
+                for (int j = 0; j < m_SCALE; j++) {
+                    draw_char('-', m_UI_WIDTH + oldX * m_SCALE + j, oldY * m_SCALE + i, backgroundColor, backgroundColor);
+                }
+            }
+        }
+    }
+    for(int i = 0; i < 3; i++){
+        if(m_desiredPlant == m_item[i]->m_type){
+            drawInGame(m_item[i], m_plantPosX, m_plantPosY);
+        }
+    }
+}
+
+void World::buy(int& coins)
+{
+    if(m_desiredPlant == NOPLANT){
+        for(int i = 0; i < 3; i++){
+            if(GetAsyncKeyState(m_item[i]->m_key) && m_item[i]->m_price <= coins){
+                coins -= m_item[i]->m_price;
+                m_desiredPlant = m_item[i]->m_type;
+            }
+        }
+    }
+}
+
 bool World::checkForCollision(Zombie zombie, Bullet bullet){
     //TO-DO the number in the for-cycle must not be hard-coded
     if(bullet.m_x + 10 >= zombie.m_x && bullet.m_y == zombie.m_y){
@@ -49,9 +119,9 @@ bool World::checkForCollision(Zombie zombie, Bullet bullet){
 
 void World::addPlant()
 {
-    PLANTS type = m_shop->m_desiredPlant;
+    PLANTS type = m_desiredPlant;
     if(type != NOPLANT){
-        int x = m_shop->m_plantPosX, y = m_shop->m_plantPosY;
+        int x = m_plantPosX, y = m_plantPosY;
         if(type == BEANSHOOTER){
             Plant* beanshooter1 = new Beanshooter();
             beanshooter1->init(x, y, "BeanshooterConfig.txt");
@@ -65,9 +135,9 @@ void World::addPlant()
             sunflower1->init(x, y, "SunflowerConfig.txt");
             m_plants.push_back(sunflower1);
         }
-        m_shop->m_desiredPlant = NOPLANT;
-        m_shop->m_plantPosX = 0;
-        m_shop->m_plantPosY = 0;
+        m_desiredPlant = NOPLANT;
+        m_plantPosX = 0;
+        m_plantPosY = 0;
     }
 }
 
@@ -142,8 +212,8 @@ void World::update()
     //shop
     addCoins();
     m_shop->updateUI(m_coins);
-    m_shop->buy(m_coins);
-    m_shop->plant();
+    buy(m_coins);
+    plant();
 }
 
 void World::draw()

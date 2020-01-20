@@ -35,6 +35,13 @@ class World
         int m_LANE_COUNT;
         int m_SPACE_COUNT;
         int m_coins;
+        int m_plantPosX;
+        int m_plantPosY;
+        ShopItem* m_item[3];
+        PLANTS m_desiredPlant;
+        void drawInGame(ShopItem* item, int x, int y);
+        void buy(int& coins);
+        void plant();
         void cleaner();
         void initWorld();
         void update();
