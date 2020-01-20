@@ -34,7 +34,7 @@ int main()
         world.update();
         world.draw();
         world.cleaner();
-        Sleep(50);
+        Sleep(100);
     }
 
     return 0;

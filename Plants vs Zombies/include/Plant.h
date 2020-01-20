@@ -25,6 +25,7 @@ class Plant
         Plant();
         virtual ~Plant();
         virtual void init(int x, int y, string configName);
+        virtual void clearPrint();
         virtual void print();
         virtual int action();
 
